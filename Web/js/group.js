@@ -18,7 +18,16 @@ async function init() {
     }
 
 
-    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    try {
+        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    } catch (err) {
+        if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+            console.log('Permission denied by user');
+        } else {
+            console.log('Error accessing media devices: ' + err.message);
+        }
+        return;
+    }
     video.srcObject = localStream;
 
 
