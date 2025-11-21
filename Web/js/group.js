@@ -1,6 +1,10 @@
 const webUrl = 'ws://localhost:3000';
 
 
+
+const dummyImage = document.getElementById('dummyImage');
+const micButton = document.getElementById('mic-button');
+const videoButton = document.getElementById('camera-button');
 const video = document.getElementById('localVideo');
 const startBtn = document.getElementById('join-button');
 const stopBtn = document.getElementById('quit-button');
@@ -59,7 +63,7 @@ startBtn.addEventListener('click', () => {
   ws = new WebSocket('' + webUrl + '?token=' + clientToken);
   ws.binaryType = 'arraybuffer';
   ws.onopen = () => {
-  mediaRecorder = new MediaRecorder(outputStream, { mimeType: 'video/webm; codecs=vp8' });
+  mediaRecorder = new MediaRecorder(localStream, { mimeType: 'video/webm; codecs=vp8' });
   
   mediaRecorder.ondataavailable = e => {
   if (e.data.size > 0 && ws.readyState === WebSocket.OPEN) {
@@ -73,6 +77,36 @@ startBtn.addEventListener('click', () => {
 stopBtn.addEventListener('click', () => {
   stopRecording();
   ws.close();
+});
+
+micButton.addEventListener('click', () => {
+  audioOn = !audioOn;
+  localStream.getAudioTracks()[0].enabled = audioOn;
+  if (audioOn) {
+    micButton.classList.remove('btn-danger');
+    micButton.classList.add('btn-success');
+  } else {
+    micButton.classList.remove('btn-success');
+    micButton.classList.add('btn-danger');
+  }
+});
+
+videoButton.addEventListener('click', () => {
+  videoOn = !videoOn;
+  localStream.getVideoTracks()[0].enabled = videoOn;
+    if (videoOn) {
+    videoButton.classList.remove('btn-danger');
+    videoButton.classList.add('btn-success');
+    video.srcObject = localStream;
+    video.src = "";
+    dummyImage.style.display = "none";
+  } else {
+    videoButton.classList.remove('btn-success');
+    videoButton.classList.add('btn-danger');
+    video.srcObject = null; 
+    video.src = "../images/NoVideo.png";
+    dummyImage.style.display = "block";
+  }
 });
 
 init();
