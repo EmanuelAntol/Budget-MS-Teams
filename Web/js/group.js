@@ -10,9 +10,9 @@ const startBtn = document.getElementById('join-button');
 const stopBtn = document.getElementById('quit-button');
 var clientToken = localStorage.getItem('clientToken');
 var looggedIn = Boolean(localStorage.getItem('loggedIn'));
-var mediaRecorder; // MediaRecorder instance
-var localStream; // Media stream z kamery
-var ws; // Spojeni s WebSocket serverem
+var mediaRecorder;
+var localStream; 
+var ws; 
 var videoOn = true;
 var audioOn = true;
 
@@ -33,12 +33,6 @@ async function init() {
         return;
     }
     video.srcObject = localStream;
-
-
-    video.onloadedmetadata = () => {
-    canvasVideo.width = video.videoWidth;
-    canvasVideo.height = video.videoHeight;
-  };
 
 
 }
@@ -98,13 +92,12 @@ videoButton.addEventListener('click', () => {
     videoButton.classList.remove('btn-danger');
     videoButton.classList.add('btn-success');
     video.srcObject = localStream;
-    video.src = "";
+    video.style.display = "block";
     dummyImage.style.display = "none";
   } else {
     videoButton.classList.remove('btn-success');
     videoButton.classList.add('btn-danger');
-    video.srcObject = null; 
-    video.src = "../images/NoVideo.png";
+    video.style.display = "none";
     dummyImage.style.display = "block";
   }
 });
