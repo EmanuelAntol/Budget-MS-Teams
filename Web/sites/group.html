@@ -24,23 +24,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="home.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="group.html">Meeting</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="player.html">Join meeting</a>
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button class="btn btn-success" type="button" style="margin-left: 10px;" id="login-button">Log in</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="presenter.html">Present</a>
+                        <button class="btn btn-danger" type="button" style="margin-left: 10px; display: none;" id="loggout-button">Log out</button>
                     </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <button class="btn btn-success" type="button" style="margin-left: 10px;" id="login-button">Log in</button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="btn btn-danger" type="button" style="margin-left: 10px; display: none;" id="loggout-button">Log out</button>
-                        </li>
-                    </ul>
                 </ul>
             </div>
         </div>
@@ -55,7 +51,7 @@
                         <div class="col-12 align-items-center">
                             <div class="card-body p-lg-4 p-md-3 text-black">
                                 <div id="playerCard" class="card" style="width: 100%;">
-                                    <video id="hlsPlayer" class="video-js" poster="../images/SplashScreen.png" autoplay controls style="width: 100%;">
+                                    <video id="hlsPlayer" class="video-js" poster="../images/SplashScreen.png" autoplay controls style="width: 100%; height: auto;">
                                         <source src="/api/hls/stream.m3u8" type="application/x-mpegURL" label="auto" selected="true">
                                         <p class="vjs-no-js">
                                             Prohlížeč nepodporuje Javascript nebo HTML5.
@@ -110,8 +106,8 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="js/video.min.js"></script>
+    <script src="../js/video.min.js"></script>
     <script src="../js/navbar.js"></script>
-    <script src="../js/presenter.js"></script>
+    <script src="../js/group.js"></script>
 </body>
 </html>

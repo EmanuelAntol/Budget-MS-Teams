@@ -1,40 +1,41 @@
+const webUrl = 'ws://localhost:3000';
+
+
 const video = document.getElementById('localVideo');
 const startBtn = document.getElementById('join-button');
 const stopBtn = document.getElementById('quit-button');
-
-
-
+var clientToken = localStorage.getItem('clientToken');
+var looggedIn = Boolean(localStorage.getItem('loggedIn'));
 var mediaRecorder; // MediaRecorder instance
 var localStream; // Media stream z kamery
 var ws; // Spojeni s WebSocket serverem
+var videoOn = true;
+var audioOn = true;
 
 async function init() {
-  localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-  video.srcObject = localStream;
+    if (!looggedIn) {
+        window.location.href = 'home.html';
+    }
 
 
-  // Nastavit velikost canvasů podle velikosti videa
-  video.onloadedmetadata = () => {
+    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    video.srcObject = localStream;
+
+
+    video.onloadedmetadata = () => {
     canvasVideo.width = video.videoWidth;
     canvasVideo.height = video.videoHeight;
   };
 
+
 }
-
-
-
-
-
-
 
 
 function startRecording() {
-  mediaRecorder.start(200); // parametr určuje velikost chunku v ms
-
+  mediaRecorder.start(200); 
   startBtn.disabled = true;
   stopBtn.disabled = false;
 }
-
 
 function stopRecording() {
   mediaRecorder.stop();
@@ -45,11 +46,8 @@ function stopRecording() {
 }
 
 startBtn.addEventListener('click', () => {
-  // Výpočet identifikátoru klienta
-  const clientId = 'user' + Math.floor(Math.random() * 1000);
 
-
-  ws = new WebSocket('ws://localhost:3000?clientId=' + clientId);
+  ws = new WebSocket('' + webUrl + '?token=' + clientToken);
   ws.binaryType = 'arraybuffer';
   ws.onopen = () => {
   mediaRecorder = new MediaRecorder(outputStream, { mimeType: 'video/webm; codecs=vp8' });

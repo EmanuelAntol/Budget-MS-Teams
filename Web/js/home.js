@@ -1,15 +1,18 @@
+const apiUrl = 'http://localhost/api/login';
+
 const loginButton = document.getElementById('submit');
 const form = document.getElementById('loginForm');
 const usernameInput = document.getElementById('login');
 const passwordInput = document.getElementById('passwd');
+const incorrectLogin = document.getElementById('incorrect-login');
+looggedIn = Boolean(localStorage.getItem('loggedIn'));
 var looggedIn = false;
 
 
 function init() {
-  username = localStorage.getItem('username');
-  looggedIn = Boolean(localStorage.getItem('loggedIn'));
+  
   if (looggedIn) {
-    window.location.href = 'player.html';
+    window.location.href = 'group.html';
   }
   
 }
@@ -17,7 +20,7 @@ window.onload = init;
 
 loginButton.addEventListener('click',  async (e) => {
   if (looggedIn) {
-    console.log('Already logged in');
+    window.location.href = 'group.html';
   }
   else {
     e.preventDefault();
@@ -25,23 +28,26 @@ loginButton.addEventListener('click',  async (e) => {
     const username = usernameInput.value;
     const password = passwordInput.value;
 
-    const res = await fetch('http://localhost/api/login', {
+    const res = await fetch('apiUrl', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
       credentials: 'include'
       
     });
-    console.log(res);
     const data = await res.json();
 
     if(res.ok){
+    incorrectLogin.style.display = 'none';
     console.log(data);
     localStorage.setItem('loggedIn', 'true');
+    localStorage.setItem('clientToken', username);
+    //localStorage.setItem('clientToken', data.clientToken);
     localStorage.setItem('username', username);
-    window.location.href = 'player.html';
+    window.location.href = 'group.html';
     }
     else {
+      incorrectLogin.style.display = 'block';
       console.log('Login failed:', data.message);
     }
 }

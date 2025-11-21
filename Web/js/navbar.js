@@ -16,6 +16,7 @@ window.onload = init;
 loggoutButton.addEventListener('click',  () => {
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('username');
+    localStorage.removeItem('clientToken');
     window.location.href = '../index.html';
 });
 
