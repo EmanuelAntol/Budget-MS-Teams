@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "name": "auth-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "auth-server.js",
+  "scripts": {
+    "start": "node auth-server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "ws": "^8.18.3",
+    "express-session": "^1.18.2"
+  }
+}
