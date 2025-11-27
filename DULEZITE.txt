@@ -1,0 +1,4 @@
+zmenit localhost na const v:
+
+presenter.js
+auth-server.js

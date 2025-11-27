@@ -1,0 +1,17 @@
+2025/11/15 22:55:35 [emerg] 17096#9124: unknown directive "s" in D:\Windows_New\Plocha\MDS_projekt\web/conf/nginx.conf:80
+2025/11/15 23:32:13 [error] 26960#25440: *16 hls: force fragment split: 95.929 sec, , client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:32:13 [alert] 26960#25440: *16 SetFileTime() 'keys/client_user278-0.key' failed (6: The handle is invalid), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:37:57 [alert] 3308#17100: *5 SetFileTime() 'keys/client_user807-0.key' failed (6: The handle is invalid), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:44:47 [error] 29204#26444: *6 hls: rename failed: 'temp/tmp_hls/client_user531.m3u8.bak'->'temp/tmp_hls/client_user531.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:44:57 [error] 29204#26444: *6 hls: rename failed: 'temp/tmp_hls/client_user531.m3u8.bak'->'temp/tmp_hls/client_user531.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:52:21 [emerg] 14060#3000: unknown directive "hls_fragment_splitting" in D:\Windows_New\Plocha\MDS_projekt\web/conf/nginx.conf:87
+2025/11/15 23:52:39 [emerg] 29424#26640: unknown directive "hls_fragment_splitting" in D:\Windows_New\Plocha\MDS_projekt\web/conf/nginx.conf:87
+2025/11/15 23:53:28 [error] 23872#11872: *6 hls: rename failed: 'temp/tmp_hls/client_user411.m3u8.bak'->'temp/tmp_hls/client_user411.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:53:36 [error] 23872#11872: *6 hls: rename failed: 'temp/tmp_hls/client_user411.m3u8.bak'->'temp/tmp_hls/client_user411.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:53:43 [error] 23872#11872: *6 hls: rename failed: 'temp/tmp_hls/client_user411.m3u8.bak'->'temp/tmp_hls/client_user411.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:53:51 [error] 23872#11872: *6 hls: rename failed: 'temp/tmp_hls/client_user411.m3u8.bak'->'temp/tmp_hls/client_user411.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:53:53 [error] 23872#11872: *6 hls: rename failed: 'temp/tmp_hls/client_user411.m3u8.bak'->'temp/tmp_hls/client_user411.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:54:42 [error] 27876#29496: *5 hls: rename failed: 'temp/tmp_hls/client_user824.m3u8.bak'->'temp/tmp_hls/client_user824.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:54:47 [error] 27876#29496: *5 hls: rename failed: 'temp/tmp_hls/client_user824.m3u8.bak'->'temp/tmp_hls/client_user824.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:54:55 [error] 27876#29496: *5 hls: rename failed: 'temp/tmp_hls/client_user824.m3u8.bak'->'temp/tmp_hls/client_user824.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2025/11/15 23:59:38 [error] 16744#7892: *6 hls: force fragment split: 52.986 sec, , client: 127.0.0.1, server: 0.0.0.0:1935
