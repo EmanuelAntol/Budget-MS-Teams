@@ -41,14 +41,20 @@ loginButton.addEventListener('click',  async (e) => {
     incorrectLogin.style.display = 'none';
     console.log(data);
     localStorage.setItem('loggedIn', 'true');
-    localStorage.setItem('clientToken', username);
-    //localStorage.setItem('clientToken', data.clientToken);
     localStorage.setItem('username', username);
+
+
+    localStorage.setItem('clientToken', username); //Toto odstranit po sfunkcneni backend generaci tokenu
+    //localStorage.setItem('clientToken', data.clientToken); //odkomentovat po sfunkcneni backend generaci tokenu
+    
     window.location.href = 'group.html';
     }
     else {
       incorrectLogin.style.display = 'block';
       console.log('Login failed:', data.message);
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('username');
+      localStorage.removeItem('clientToken');
     }
 }
 });
