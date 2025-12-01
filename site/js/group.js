@@ -1,4 +1,8 @@
 const webUrl = 'ws://localhost:3001';
+const STREAM_ADDRESS = 'http://localhost:3000/recordings/combined.m3u8';
+                  //jako IP by mělo byt IP auth serveru a jako port, port auth serveru
+                  //dava mi to tak smysl bo to pouziva stejny port
+                  //mozna kecam samozrejme ja nevim, ale toto je stejne jak co si deployoval ve čtvrtek
 
 
 
@@ -116,6 +120,45 @@ videoButton.addEventListener('click', () => {
     video.style.display = "none";
     dummyImage.style.display = "block";
   }
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+console.log('Initializing video player...');
+
+var player = videojs('hlsPlayer', {
+  autoplay: true,
+  controls: true,
+  liveui: true
+});
+
+player.src({
+  src: STREAM_ADDRESS,
+  type: 'application/x-mpegURL'
+});
+
+// Refresh button handler
+document.getElementById('refresh-player-button').addEventListener('click', function() {
+  console.log('Manually refreshing player...');
+  player.src({
+      src: STREAM_ADDRESS + '?t=' + Date.now(),
+      type: 'application/x-mpegURL'
+  });
+  player.load();
+});
+
+// Refresh player every 2 seconds on error (stream stopped)
+player.on('error', function() {
+  console.log('Stream error, will retry...');
+  setTimeout(function() {
+      player.src({
+          src: STREAM_ADDRESS + '?t=' + Date.now(),
+          type: 'application/x-mpegURL'
+      });
+      player.load();
+  }, 2000);
+});
 });
 
 init();
