@@ -6,7 +6,7 @@ const usernameInput = document.getElementById('login');
 const passwordInput = document.getElementById('passwd');
 const incorrectLogin = document.getElementById('incorrect-login');
 looggedIn = Boolean(localStorage.getItem('loggedIn'));
-var looggedIn = false;
+var looggedIn = Boolean(localStorage.getItem('loggedIn'));
 
 
 function init() {

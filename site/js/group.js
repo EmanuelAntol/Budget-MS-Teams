@@ -27,9 +27,6 @@ var audioOn = true;
 
 
 async function init() {
-    if (!looggedIn) {
-        window.location.href = 'home.html';
-    }
 
 
     try {
@@ -71,21 +68,27 @@ startBtn.addEventListener('click', () => {
     socket.send(JSON.stringify({ type: "auth", token_node }));
   });*/
 
-  ws = new WebSocket('' + webUrl + '?token=' + clientToken);
-  ws.binaryType = 'arraybuffer';
-  ws.onopen = () => {
-    const token_node = localStorage.getItem("clientToken");
-    ws.send(JSON.stringify({ type: "auth", token_node }));
 
-    mediaRecorder = new MediaRecorder(localStream, { mimeType: 'video/webm; codecs=vp8' });
+  if (looggedIn) {
+    ws = new WebSocket('' + webUrl + '?token=' + clientToken);
+    ws.binaryType = 'arraybuffer';
+    ws.onopen = () => {
+      const token_node = localStorage.getItem("clientToken");
+      ws.send(JSON.stringify({ type: "auth", token_node }));
 
-    mediaRecorder.ondataavailable = e => {
-      if (e.data.size > 0 && ws.readyState === WebSocket.OPEN) {
-        ws.send(e.data); // odeslat chunk na server
-      }
+      mediaRecorder = new MediaRecorder(localStream, { mimeType: 'video/webm; codecs=vp8' });
+
+      mediaRecorder.ondataavailable = e => {
+        if (e.data.size > 0 && ws.readyState === WebSocket.OPEN) {
+          ws.send(e.data); // odeslat chunk na server
+        }
+      };
+      startRecording();
     };
-    startRecording();
-  };
+  }
+  else {
+    window.location.href = 'home.html'; 
+  }
 });
 
 stopBtn.addEventListener('click', () => {
