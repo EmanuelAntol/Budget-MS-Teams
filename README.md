@@ -13,6 +13,10 @@ To achieve this, we leveraged Bootstrap, a frontend toolkit that provides a simp
 ## Website frontend
 As mentioned in the project overview the websites responsive design is achieved mainly by using <a href="https://getbootstrap.com/">Bootstrap</a> fronend toolkit. It enables automatic adjustment of the website layout based on the device screen size. This ensures that users have a consistent and user-friendly experience whether they access the site from a desktop computer, tablet, or smartphone. Specifically, the website uses Bootstrap´s collumn system, navigation bar components, collapsible elements, colors and button styles. A good example of theese elements can be found on the main meeting page on the website, which is also show in the image below.
 
+<p align="center">
+  <img src="/DocImages/meeting.png" width="100%" style="display: inline-block;"/>
+</p>
+
 
 
 
