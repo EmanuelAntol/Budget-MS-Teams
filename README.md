@@ -13,9 +13,13 @@ To achieve this, we leveraged Bootstrap, a frontend toolkit that provides a simp
 ## Website frontend
 As mentioned in the project overview the websites responsive design is achieved mainly by using <a href="https://getbootstrap.com/">Bootstrap</a> fronend toolkit. It enables automatic adjustment of the website layout based on the device screen size. This ensures that users have a consistent and user-friendly experience whether they access the site from a desktop computer, tablet, or smartphone. Specifically, the website uses Bootstrap´s collumn system, navigation bar components, collapsible elements, colors and button styles. A good example of theese elements can be found on the main meeting page on the website, which is also show in the image below.
 
-<p align="center">
+<p allign="center">
   <img src="/DocImages/meeting.png" width="100%" style="display: inline-block;"/>
 </p>
+
+The website also uses <a href="https://videojs.com/">Video.js</a> library to add support for HLS and MPGEG-DASH video streaming protocols, which are not natively supported in all web browsers. HLS is used for delivering live streams to users from the server. This allows for adaptive streaming, where the video quality can adjust based on the user´s internet connection, providing a smoother viewing experience. While streams from server to client are handled using HLS protocol, the communication from client to server is done using WebRTC technology. This is because WebRTC enables low-latency audio and video transmission from users to the server. Other website elements such as buttons, login features and forms are implemented using JavaScript and HTML5.
+
+All code related to the website frontend can be found in the <a href="https://github.com/EmanuelAntol/Budget-MS-Teams/tree/main/site">site</a> folder in the project repository.
 
 
 
@@ -25,7 +29,9 @@ As mentioned in the project overview the websites responsive design is achieved 
 
 
 ## Website backend
+
 ### Audio and video processing
+
 ### Authentication
 
 
