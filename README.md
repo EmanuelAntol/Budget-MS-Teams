@@ -36,5 +36,5 @@ All code related to the website frontend can be found in the <a href="https://gi
 
 
 ## Hosting
-Tho entire application is hosted on Jiří's infrastructure. The domain of this app is [groups.kozina.tech](https://groups.kozina.tech). The app runs behind reverse proxy so there are no certificates required to run it. This poses a major security risk if not handled properly! We recommend running this application behind a reverse proxy server or deploying it with your own certificates to ensure security. Deployment required fine-tuning and adjustments throughout the application code.
+Tho entire application is hosted on Jiří's infrastructure. The domain of this app is [groups.kozina.tech](https://groups.kozina.tech). The app runs behind reverse proxy so there are no certificates required to run it. This poses a major security risk if not handled properly! We recommend running this application behind a reverse proxy server or deploying it with your own certificates to ensure security. Deployment required fine-tuning and adjustments throughout the application code. <br>
 One of the main ideas was hardware support for decoding and transcoding. This idea was not implemented due to the Italian roots of our code.
