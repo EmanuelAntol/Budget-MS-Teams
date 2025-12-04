@@ -1,10 +1,10 @@
 const webUrl = 'ws://localhost:3001';
+
 const STREAM_ADDRESS = 'http://localhost:3000/recordings/combined.m3u8';
-                  //jako IP by mělo byt IP auth serveru a jako port, port auth serveru
-                  //dava mi to tak smysl bo to pouziva stejny port
-                  //mozna kecam samozrejme ja nevim, ale toto je stejne jak co si deployoval ve čtvrtek
 
-
+const STREAM_ADDRESS_QUALITY = 'http://localhost:3000/recordings';
+                                //hihi dalsi konstanta  (since qualities are stored in separate folders, it need to have the path to the folder, not to the stream)
+                                //but STREAM_ADDRESS is still important for AUTO quality selection
 
 const dummyImage = document.getElementById('dummyImage');
 const micButton = document.getElementById('mic-button');
@@ -40,8 +40,6 @@ async function init() {
         return;
     }
     video.srcObject = localStream;
-
-
 }
 
 
@@ -80,7 +78,7 @@ startBtn.addEventListener('click', () => {
 
       mediaRecorder.ondataavailable = e => {
         if (e.data.size > 0 && ws.readyState === WebSocket.OPEN) {
-          ws.send(e.data); // odeslat chunk na server
+          ws.send(e.data); // send chunk to server
         }
       };
       startRecording();
@@ -125,43 +123,138 @@ videoButton.addEventListener('click', () => {
   }
 });
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-console.log('Initializing video player...');
-
-var player = videojs('hlsPlayer', {
-  autoplay: true,
-  controls: true,
-  liveui: true
-});
-
-player.src({
-  src: STREAM_ADDRESS,
-  type: 'application/x-mpegURL'
-});
-
-// Refresh button handler
-document.getElementById('refresh-player-button').addEventListener('click', function() {
-  console.log('Manually refreshing player...');
-  player.src({
-      src: STREAM_ADDRESS + '?t=' + Date.now(),
-      type: 'application/x-mpegURL'
-  });
-  player.load();
-});
-
-// Refresh player every 2 seconds on error (stream stopped)
-player.on('error', function() {
-  console.log('Stream error, will retry...');
-  setTimeout(function() {
-      player.src({
-          src: STREAM_ADDRESS + '?t=' + Date.now(),
-          type: 'application/x-mpegURL'
-      });
-      player.load();
-  }, 2000);
-});
-});
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing video player...');
+            
+            var player = videojs('hlsPlayer', {
+                autoplay: false,
+                preload: 'auto',
+                controls: true,
+                liveui: false,
+                html5: {
+                    vhs: {
+                        overrideNative: true,
+                        smoothQualityChange: true
+                    }
+                }
+            });
+            
+            player.src({
+                src: STREAM_ADDRESS,
+                type: 'application/x-mpegURL'
+            });
+            
+            //quality handler
+            var qualitySelector = document.getElementById('quality-selector');
+            qualitySelector.addEventListener('change', function() {
+                var selectedQuality = this.value;
+                console.log('Quality selected:', selectedQuality);
+                
+                if (selectedQuality === 'auto') {
+                    player.src({
+                        src: STREAM_ADDRESS,
+                        type: 'application/x-mpegURL'
+                    });
+                    player.load();
+                } else {
+                    var qualityUrl = `${STREAM_ADDRESS_QUALITY}/stream_` + selectedQuality + '/playlist.m3u8';
+                    player.src({
+                        src: qualityUrl,
+                        type: 'application/x-mpegURL'
+                    });
+                    player.load();
+                }
+            });
+            
+            //this is for the blue refresh button (refreshes only the player when clicked)
+            document.getElementById('refresh-player-button').addEventListener('click', function() {
+                console.log('Manually refreshing player...');
+                var currentQuality = qualitySelector.value;
+                
+                if (currentQuality === 'auto') {
+                    player.src({
+                        src: STREAM_ADDRESS + '?t=' + Date.now(),
+                        type: 'application/x-mpegURL'
+                    });
+                } else {
+                    var qualityUrl = `${STREAM_ADDRESS_QUALITY}/stream_` + currentQuality + '/playlist.m3u8?t=' + Date.now();
+                    player.src({
+                        src: qualityUrl,
+                        type: 'application/x-mpegURL'
+                    });
+                }
+                player.load();
+            });
+            
+            var retryInterval = null;
+            var lastSuccessTime = Date.now();
+            var isPlaying = false;
+            
+            function startRetryInterval() {             //periodically checks is stream is playing, when it is not, it refreshes the hlsPlayer
+                if (retryInterval) return;
+                
+                console.log('Starting continuous stream check...');
+                retryInterval = setInterval(function() {
+                    var currentTime = Date.now();
+                    
+                    if (!isPlaying || (currentTime - lastSuccessTime) > 5000) {
+                        console.log('Refreshing stream...');
+                        var currentQuality = qualitySelector.value;
+                        
+                        if (currentQuality === 'auto') {
+                            player.src({
+                                src: STREAM_ADDRESS + '?t=' + Date.now(),
+                                type: 'application/x-mpegURL'
+                            });
+                        } else {
+                            var qualityUrl = `${STREAM_ADDRESS_QUALITY}/stream_` + currentQuality + '/playlist.m3u8?t=' + Date.now();
+                            player.src({
+                                src: qualityUrl,
+                                type: 'application/x-mpegURL'
+                            });
+                        }
+                        player.load();
+                    }
+                }, 2000);
+            }
+            
+            player.on('playing', function() {       //checks if stream is playing correctly
+                console.log('Stream is playing!');
+                isPlaying = true;
+                lastSuccessTime = Date.now();
+            });
+            
+            player.on('timeupdate', function() {
+                lastSuccessTime = Date.now();
+            });
+            
+            player.on('waiting', function() {
+                console.log('Stream buffering/waiting...');
+                isPlaying = false;
+            });
+            
+            player.on('stalled', function() {
+                console.log('Stream stalled...');
+                isPlaying = false;
+            });
+            
+            player.on('error', function() {
+                console.log('Stream error detected...');
+                isPlaying = false;
+            });
+            
+            player.on('pause', function() {
+                if (!player.userActive()) {
+                    isPlaying = false;
+                }
+            });
+            
+            player.on('ended', function() {
+                console.log('Stream ended...');
+                isPlaying = false;
+            });
+            
+            startRetryInterval();
+        });
 
 init();
