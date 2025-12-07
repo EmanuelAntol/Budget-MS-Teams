@@ -24,14 +24,7 @@ The functions of the main elements on the meeting page are described below:<br>
 <<<<<<< Updated upstream
 <b>3 – Qualities button.</b> This selector manages the HLS stream quality. You have 5 different options to choose from, 360p, 480p, 720p, 1080p and Auto. Auto selects appropriate video quality based on your internet speed.<br>
 <b>4 – Player refresh button.</b> Refreshes the HLS player if anything unexpected happens. Everything should refresh automatically, so this button is here just in case something goes wrong. You <b>CANNOT</b> refresh the whole page, because you would stop your webcam stream.
-=======
-<b>3 – Qualities button.</b> This selector manages the HLS stream quality. You have 5 different options to choose from, 360p, 480p, 720p, 1080p and Auto. Auto selects appropriate video quality based on curent conditions.<br>
-<b>4 – Player refresh button.</b> Refreshes the HLS player if anything unexpected happens. Everything should refresh automatically, so this button is here in case something goes wrong. 
->>>>>>> Stashed changes
-=======
-<b>3 – Qualities button.</b> This selector manages the HLS stream quality. You have 5 different options to choose from, 360p, 480p, 720p, 1080p and Auto. Auto selects appropriate video quality based on curent conditions.<br>
-<b>4 – Player refresh button.</b> Refreshes the HLS player if anything unexpected happens. Everything should refresh automatically, so this button is here in case something goes wrong. 
->>>>>>> Stashed changes
+
 
 
 
