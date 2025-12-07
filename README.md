@@ -22,10 +22,8 @@ The functions of the main elements on the meeting page are described below:<br>
 <b>2 – Webcam element.</b> The join and quit button are used to start or stop streaming your webcam and audio. You can also turn off your webcam or microphone if you want.<br>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-<b>3 – Qualities button.</b> This selector manages the HLS stream quality. You have 5 different options to choose from, 360p, 480p, 720p, 1080p and Auto. Auto selects appropriate video quality based on your internet speed.<br>
+<b>3 – Qualities button.</b> This selector manages the HLS stream quality. You have 5 different options to choose from, 360p, 480p, 720p, 1080p and Auto. Auto selects appropriate video quality based on current conditions.<br>
 <b>4 – Player refresh button.</b> Refreshes the HLS player if anything unexpected happens. Everything should refresh automatically, so this button is here just in case something goes wrong. You <b>CANNOT</b> refresh the whole page, because you would stop your webcam stream.
-
-
 
 
 The website also uses <a href="https://videojs.com/">Video.js</a> library to add support for HLS and MPEG-DASH video streaming protocols, which are not natively supported in all web browsers. HLS is used for delivering live streams to users from the server. This allows for adaptive streaming, where the video quality can adjust based on the user´s internet connection, providing a smoother viewing experience. Other website elements such as buttons, login features and forms are implemented using JavaScript and HTML5.
