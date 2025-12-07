@@ -21,8 +21,13 @@ The functions of the main elements on the meeting page are described below:<br>
 <b>1 – Navigation bar.</b> Meeting is the main page that is shown in the picture, about takes you to this repository. Login and logout buttons are used to log in or out of the website. The username is shown in the login button when logged in.<br>
 <b>2 – Webcam element.</b> The join and quit button are used to start or stop streaming your webcam and audio. You can also turn off your webcam or microphone if you want.<br>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <b>3 – Qualities button.</b> This selector manages the HLS stream quality. You have 5 different options to choose from, 360p, 480p, 720p, 1080p and Auto. Auto selects appropriate video quality based on your internet speed.<br>
 <b>4 – Player refresh button.</b> Refreshes the HLS player if anything unexpected happens. Everything should refresh automatically, so this button is here just in case something goes wrong. You <b>CANNOT</b> refresh the whole page, because you would stop your webcam stream.
+=======
+<b>3 – Qualities button.</b> This selector manages the HLS stream quality. You have 5 different options to choose from, 360p, 480p, 720p, 1080p and Auto. Auto selects appropriate video quality based on curent conditions.<br>
+<b>4 – Player refresh button.</b> Refreshes the HLS player if anything unexpected happens. Everything should refresh automatically, so this button is here in case something goes wrong. 
+>>>>>>> Stashed changes
 =======
 <b>3 – Qualities button.</b> This selector manages the HLS stream quality. You have 5 different options to choose from, 360p, 480p, 720p, 1080p and Auto. Auto selects appropriate video quality based on curent conditions.<br>
 <b>4 – Player refresh button.</b> Refreshes the HLS player if anything unexpected happens. Everything should refresh automatically, so this button is here in case something goes wrong. 
